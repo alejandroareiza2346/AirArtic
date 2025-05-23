@@ -15,10 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from django.http import HttpResponse
+from django.shortcuts import render
 
 def home(request):
-    return HttpResponse("Bienvenido a Air Arctic")
+    return render(request, 'index.html')  # Render the index.html template
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,5 +26,5 @@ urlpatterns = [
     path('api/', include('Member.urls')),
     path('api/', include('Trip.urls')),
     path('api/', include('Explore.urls')),
-    path('', home, name='home'),  # Add a route for the root URL
+    path('', home, name='home'),  # Update the root URL to use the new home view
 ]
