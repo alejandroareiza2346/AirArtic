@@ -15,6 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.http import HttpResponse
+
+def home(request):
+    return HttpResponse("Bienvenido a Air Arctic")
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -22,4 +26,5 @@ urlpatterns = [
     path('api/', include('Member.urls')),
     path('api/', include('Trip.urls')),
     path('api/', include('Explore.urls')),
+    path('', home, name='home'),  # Add a route for the root URL
 ]
