@@ -1,9 +1,11 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-   
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Status by Route - Air Arctic</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script type="text/javascript" src="{% static 'misc2.js' %}"></script>
     <link rel="stylesheet" href="{% static 'css/explorePage.css' %}">
@@ -112,32 +114,36 @@ tr:hover {background-color: #D6EEEE;}
     async function displayflightStatus() { 
         
         let statusObj = await getStatus(departureAirport, destinationAirport, departureDate)
-        document.getElementById('statusData').innerHTML=statusObj.map((statusData) => 
-                    
-            `<tr>
+        if (Array.isArray(statusObj)) {
+            document.getElementById('statusData').innerHTML = statusObj.map((statusData) => 
+                        
+                `<tr>
 
-                <td>${statusData.flight.flightNumber}</td>
-                <td>${statusData.flight.departureAirport.iataCode}</td>
-                <td>${statusData.flight.destinationAirport.iataCode}</td>
-                <td>${statusData.flight.departureDate}</td>
-                <td>${statusData.flight.departureTime}</td>
-                <td>${statusData.flight.arrivalDate}</td>
-                <td>${statusData.flight.arrivalTime}</td>
-                <td>${statusData.status}</td>
-                
-            </tr>`   
-    
-        ).join("");
+                    <td>${statusData.flight.flightNumber}</td>
+                    <td>${statusData.flight.departureAirport.iataCode}</td>
+                    <td>${statusData.flight.destinationAirport.iataCode}</td>
+                    <td>${statusData.flight.departureDate}</td>
+                    <td>${statusData.flight.departureTime}</td>
+                    <td>${statusData.flight.arrivalDate}</td>
+                    <td>${statusData.flight.arrivalTime}</td>
+                    <td>${statusData.status}</td>
+                    
+                </tr>`   
+        
+            ).join("");
+        } else {
+            document.getElementById('statusData').innerHTML = "<tr><td colspan='8'>No flight status data available.</td></tr>";
+        }
     
     }
     
     </script>
 <br><br>
-<div class = "flightStatusDiv" style="min-height: 650px;">
+<div class="flightStatusDiv">
 
 <h2> Flight Status</h2>
 
-        <table style="border: 2px solid black;">
+        <table class="flight-status-table">
             <thead>
                 <tr>
                     <th>Flight Number</th>
@@ -163,22 +169,30 @@ tr:hover {background-color: #D6EEEE;}
     <div class="footer">
       <div class="grid-container-footer">
         <div> <h6>About</h6>
+          <ul>
               <li>About Us</li>
               <li>Careers</li>
+          </ul>
         </div>
         <div> <h6>Manage</h6>
-          <li>Check In</li>
-          <li>Manage Your Flight</li>
-          <li>Flight Status</li>
+          <ul>
+            <li>Check In</li>
+            <li>Manage Your Flight</li>
+            <li>Flight Status</li>
+          </ul>
         </div>
         <div> <h6>Book</h6>
-          <li>Book Your Flight</li>
-          <li>Search For Flight</li>
-          <li>Planning Your Trip</li>
+          <ul>
+            <li>Book Your Flight</li>
+            <li>Search For Flight</li>
+            <li>Planning Your Trip</li>
+          </ul>
         </div> 
         <div> <h6>Loyalty</h6>
-          <li>Login Into Air Arctic Rewards</li>
-          <li>Join Air Arctic Rewards</li>
+          <ul>
+            <li>Login Into Air Arctic Rewards</li>
+            <li>Join Air Arctic Rewards</li>
+          </ul>
         </div>
         <div> <h6>Subscribe To Our Special Offers</h6><br>
           <form method = "post">
@@ -188,13 +202,17 @@ tr:hover {background-color: #D6EEEE;}
             </form>
         </div>
         <div> <h6>Before You Fly</h6>
-          <li>Baggage</li>
-          <li>Visa & Passport Info</li>
-          <li>Seats</li>
+          <ul>
+            <li>Baggage</li>
+            <li>Visa & Passport Info</li>
+            <li>Seats</li>
+          </ul>
         </div>  
         <div> <h6>Help</h6>
-          <li>Help Centre</li>
-          <li>Contact an Agent</li>
+          <ul>
+            <li>Help Centre</li>
+            <li>Contact an Agent</li>
+          </ul>
         </div>
         <div><h6>Feedback</h6>
           <form method = "post">

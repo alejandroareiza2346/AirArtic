@@ -18,7 +18,7 @@ from django.urls import path, include
 from django.shortcuts import render
 
 def home(request):
-    return render(request, 'index.html')  # Render the index.html template
+    return render(request, 'BookFlight/exploreTrip.html')  # Render the original exploreTrip.html template
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,5 +26,5 @@ urlpatterns = [
     path('api/', include('Member.urls')),
     path('api/', include('Trip.urls')),
     path('api/', include('Explore.urls')),
-    path('', home, name='home'),  # Update the root URL to use the new home view
+    path('', home, name='home'),  # Update the root URL to use the original home view
 ]
