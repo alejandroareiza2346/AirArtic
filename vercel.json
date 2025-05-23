@@ -1,13 +1,19 @@
 {
-    "builds": [{
-        "src": "AirArctic/wsgi.py",
-        "use": "@vercel/python",
-        "config": { "maxLambdaSize": "15mb", "runtime": "python3.13" }
-    }],
-    "routes": [
-        {
-            "src": "/(.*)",
-            "dest": "AirArctic/wsgi.py"
-        }
-    ]
+  "builds": [
+    {
+      "src": "manage.py",
+      "use": "@vercel/python",
+      "config": { "maxLambdaSize": "15mb" }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/static/(.*)",
+      "dest": "/static/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "manage.py"
+    }
+  ]
 }
